@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :age, :favorite, :gender, :prefecture, :region
+  has_one :drink
 
   with_options numericality: { other_than: 0 } do
     validates :gender_id
