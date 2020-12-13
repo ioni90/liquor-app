@@ -3,7 +3,7 @@ class Gender < ActiveHash::Base
     { id: 0, name: '--' },
     { id: 1, name: '女' },
     { id: 2, name: '男' },
-    { id: 3, name: 'その他' },
+    { id: 3, name: 'その他' }
   ]
 
   include ActiveHash::Associations

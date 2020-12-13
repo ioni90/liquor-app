@@ -30,7 +30,7 @@ class Favorite < ActiveHash::Base
     { id: 27, name: 'テラ' },
     { id: 28, name: 'ミード' },
     { id: 29, name: '馬乳酒' },
-    { id: 30, name: 'ヤシ酒' },
+    { id: 30, name: 'ヤシ酒' }
   ]
 
   include ActiveHash::Associations

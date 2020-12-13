@@ -6,7 +6,7 @@ class Age < ActiveHash::Base
     { id: 3, name: 'アラフォー' },
     { id: 4, name: 'アラフィフ' },
     { id: 5, name: 'アラ還' },
-    { id: 6, name: 'アラヒャク' },
+    { id: 6, name: 'アラヒャク' }
   ]
 
   include ActiveHash::Associations

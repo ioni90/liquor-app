@@ -8,7 +8,7 @@ class Region < ActiveHash::Base
     { id: 5, name: '山間部' },
     { id: 6, name: '海沿い' },
     { id: 7, name: '島' },
-    { id: 8, name: 'その他' },
+    { id: 8, name: 'その他' }
   ]
 
   include ActiveHash::Associations
