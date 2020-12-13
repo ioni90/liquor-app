@@ -1,0 +1,42 @@
+<h2>ユーザー情報変更ページ</h2>
+
+<%= form_with model: @user, url: user_path, class: 'registration-main', local: true do |f| %>
+
+  <div class="field">
+    <%= "ユーザー名：#{@nickname}" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :introduction, value='紹介：' %>
+    <%= f.text_field :introduction %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gender_id, value='性別：' %>
+    <%= f.collection_select(:gender_id, Gender.all, :id, :name, {}, {class:"pull-select"}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :age_id, value='年齢：' %>
+    <%= f.collection_select(:age_id, Age.all, :id, :name, {}, {class:"pull-select"}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :prefecture_id, value='お住まいの都道府県：' %>
+    <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"pull-select"}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :region_id, value='お住まいの地域：' %>
+    <%= f.collection_select(:region_id, Region.all, :id, :name, {}, {class:"pull-select"}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :favorite_id, value='お好みのお酒：' %>
+    <%= f.collection_select(:favorite_id, Favorite.all, :id, :name, {}, {class:"pull-select"}) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "ユーザー情報更新" %>
+  </div>
+<% end %>
