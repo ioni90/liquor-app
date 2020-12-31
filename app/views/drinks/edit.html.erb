@@ -1,0 +1,479 @@
+<h2><%= "#{current_user.nickname}さんの#{@drink.start_time.strftime("%Y年 %m月 %d日")}の内容編集画面"%></h2>
+<div hidden id='gender-id'><%=@user.gender_id%></div>
+
+<%= form_with model: @drink, url: user_drink_path(user_id: current_user.id, id: @drink.id), class: 'registration-main', id:'charge-form', local: true do |f| %>
+
+  <div hidden class='field'>
+    <%= f.label :start_time,  "飲酒した日付：" %>
+    <%= f.date_field :start_time, class:"start_time", id:"start-time" %>
+  </div>
+
+  <div class="field">お酒を飲みましたか？
+    <%= f.label :non_drinking_true, "休肝日です！", class:"label-motion" %>
+    <%= f.radio_button :non_drinking, :true, class:"remove-input-mark", id:"non-drinking-day" %>
+  
+    <%= f.label :non_drinking_false, "ハイ！", class:"label-motion" %>
+    <%= f.radio_button :non_drinking, :false, class:"remove-input-mark" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type_id, value='お酒の種類：' %>
+    <%= f.collection_select(:type_id, Type.all, :id, :name, {}, {class:"pull-select", id:"liquor-type"}) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :volume,  "飲んだ量：" %>
+    <%= f.number_field :volume, class:"volume", id:"liquor-volume", placeholder:"何ミリリットル?", maxlength:"5" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type2_id, value='お酒の種類２：', class:"display-none", id:"label-liquor-type2" %>
+    <%= f.collection_select(:type2_id, Type2.all, :id, :name, {}, {class:"pull-select", id:"liquor-type2"}) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :volume2,  "飲んだ量：", class:"display-none", id:"label-liquor-volume2" %>
+    <%= f.number_field :volume2, class:"volume", id:"liquor-volume2", placeholder:"何ミリリットル?", maxlength:"5" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type3_id, value='お酒の種類３：', class:"display-none", id:"label-liquor-type3" %>
+    <%= f.collection_select(:type3_id, Type3.all, :id, :name, {}, {class:"pull-select", id:"liquor-type3"}) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :volume3,  "飲んだ量：", class:"display-none", id:"label-liquor-volume3" %>
+    <%= f.number_field :volume3, class:"volume", id:"liquor-volume3", placeholder:"何ミリリットル?", maxlength:"5" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type4_id, value='お酒の種類４：', class:"display-none", id:"label-liquor-type4" %>
+    <%= f.collection_select(:type4_id, Type4.all, :id, :name, {}, {class:"pull-select", id:"liquor-type4"}) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :volume4,  "飲んだ量：", class:"display-none", id:"label-liquor-volume4" %>
+    <%= f.number_field :volume4, class:"volume", id:"liquor-volume4", placeholder:"何ミリリットル?", maxlength:"5" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type5_id, value='お酒の種類５：', class:"display-none", id:"label-liquor-type5" %>
+    <%= f.collection_select(:type5_id, Type5.all, :id, :name, {}, {class:"pull-select", id:"liquor-type5"}) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :volume5,  "飲んだ量：", class:"display-none", id:"label-liquor-volume5" %>
+    <%= f.number_field :volume5, class:"volume", id:"liquor-volume5", placeholder:"何ミリリットル?", maxlength:"5" %>
+  </div>
+
+  <div>
+    <div class="abv-content">
+      <span>本日の接種アルコール量：</span>
+      <span id='today-abv'>0</span>グラム
+    </div>
+    <div class="abv-content">
+      <span>血中アルコール濃度：</span>
+      <span id='blood-alcohol-content'>0</span>％
+    </div>
+    <div class="abv-content">
+      <span>酔い具合：</span>
+      <span id='today-healthiness'></span>
+    </div>
+  </div>
+
+  <div class='field'>
+    <%= f.label :comment,  "コメント：", class:"comment-decoration-label" %>
+    <%= f.text_field :comment, class:"comment-decoration-field", maxlength:"200" %>
+  </div>
+
+  <input hidden value=0 name='total_abv' id='abvCalcData'>
+
+  <div class="actions" id="submit">
+    <%= f.submit "本日のお酒を編集" %>
+  </div>
+<% end %>
+
+
+<script>
+
+function abv_calc() {
+  
+  var liquorType = document.getElementById('liquor-type');
+  var liquorVolume = document.getElementById('liquor-volume');
+  var todayAbv = document.getElementById('today-abv');
+  var todayHealthiness = document.getElementById('today-healthiness');
+
+    //接種アルコール量
+  var liquorVolumeValue = liquorVolume.value;
+  
+  if(liquorType.value == 1){
+    var liquorAlcoholContent = 15
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 2){
+    var liquorAlcoholContent = 10
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 3){
+    var liquorAlcoholContent = 15
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 4){
+    var liquorAlcoholContent = 5
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 5){
+    var liquorAlcoholContent = 35
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 6){
+    var liquorAlcoholContent = 5
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 7){
+    var liquorAlcoholContent = 9
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 8){
+    var liquorAlcoholContent = 40
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 9){
+    var liquorAlcoholContent = 10
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 10){
+    var liquorAlcoholContent = 10
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 11){
+    var liquorAlcoholContent = 8
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 12){
+    var liquorAlcoholContent = 40
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 13){
+    var liquorAlcoholContent = 40
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 14){
+    var liquorAlcoholContent = 5
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 15){
+    var liquorAlcoholContent = 10
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 16){
+    var liquorAlcoholContent = 20
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 17){
+    var liquorAlcoholContent = 30
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 18){
+    var liquorAlcoholContent = 40
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }else if(liquorType.value == 19){
+    var liquorAlcoholContent = 50
+    var abvCalc = liquorVolumeValue * (liquorAlcoholContent / 100) * 0.8;
+  }
+
+  var liquorVolume2 = document.getElementById('liquor-volume2');
+  var liquorType2 = document.getElementById('liquor-type2');
+  var liquorVolumeValue2 = liquorVolume2.value;
+  var abvCalc2 = 0;
+
+  if(liquorType2.value == 1){
+    var liquorAlcoholContent2 = 15
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 2){
+    var liquorAlcoholContent2 = 10
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 3){
+    var liquorAlcoholContent2 = 15
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 4){
+    var liquorAlcoholContent2 = 5
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 5){
+    var liquorAlcoholContent2 = 35
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 6){
+    var liquorAlcoholContent2 = 5
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 7){
+    var liquorAlcoholContent2 = 9
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 8){
+    var liquorAlcoholContent2 = 40
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 9){
+    var liquorAlcoholContent2 = 10
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 10){
+    var liquorAlcoholContent2 = 10
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 11){
+    var liquorAlcoholContent2 = 8
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 12){
+    var liquorAlcoholContent2 = 40
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 13){
+    var liquorAlcoholContent2 = 40
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 14){
+    var liquorAlcoholContent2 = 5
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 15){
+    var liquorAlcoholContent2 = 10
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 16){
+    var liquorAlcoholContent2 = 20
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 17){
+    var liquorAlcoholContent2 = 30
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 18){
+    var liquorAlcoholContent2 = 40
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }else if(liquorType2.value == 19){
+    var liquorAlcoholContent2 = 50
+    var abvCalc2 = liquorVolumeValue2 * (liquorAlcoholContent2 / 100) * 0.8;
+  }
+
+  var liquorVolume3 = document.getElementById('liquor-volume3');
+  var liquorType3 = document.getElementById('liquor-type3');
+  var liquorVolumeValue3 = liquorVolume3.value;
+  var abvCalc3 = 0;
+
+  if(liquorType3.value == 1){
+    var liquorAlcoholContent3 = 15
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 2){
+    var liquorAlcoholContent3 = 10
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 3){
+    var liquorAlcoholContent3 = 15
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 4){
+    var liquorAlcoholContent3 = 5
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 5){
+    var liquorAlcoholContent3 = 35
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 6){
+    var liquorAlcoholContent3 = 5
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 7){
+    var liquorAlcoholContent3 = 9
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 8){
+    var liquorAlcoholContent3 = 40
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 9){
+    var liquorAlcoholContent3 = 10
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 10){
+    var liquorAlcoholContent3 = 10
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 11){
+    var liquorAlcoholContent3 = 8
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 12){
+    var liquorAlcoholContent3 = 40
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 13){
+    var liquorAlcoholContent3 = 40
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 14){
+    var liquorAlcoholContent3 = 5
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 15){
+    var liquorAlcoholContent3 = 10
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 16){
+    var liquorAlcoholContent3 = 20
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 17){
+    var liquorAlcoholContent3 = 30
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 18){
+    var liquorAlcoholContent3 = 40
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }else if(liquorType3.value == 19){
+    var liquorAlcoholContent3 = 50
+    var abvCalc3 = liquorVolumeValue3 * (liquorAlcoholContent3 / 100) * 0.8;
+  }
+
+  var liquorVolume4 = document.getElementById('liquor-volume4');
+  var liquorType4 = document.getElementById('liquor-type4');
+  var liquorVolumeValue4 = liquorVolume4.value;
+  var abvCalc4 = 0;
+
+  if(liquorType4.value == 1){
+    var liquorAlcoholContent4 = 15
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 2){
+    var liquorAlcoholContent4 = 10
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 3){
+    var liquorAlcoholContent4 = 15
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 4){
+    var liquorAlcoholContent4 = 5
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 5){
+    var liquorAlcoholContent4 = 35
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 6){
+    var liquorAlcoholContent4 = 5
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 7){
+    var liquorAlcoholContent4 = 9
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 8){
+    var liquorAlcoholContent4 = 40
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 9){
+    var liquorAlcoholContent4 = 10
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 10){
+    var liquorAlcoholContent4 = 10
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 11){
+    var liquorAlcoholContent4 = 8
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 12){
+    var liquorAlcoholContent4 = 40
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 13){
+    var liquorAlcoholContent4 = 40
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 14){
+    var liquorAlcoholContent4 = 5
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 15){
+    var liquorAlcoholContent4 = 10
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 16){
+    var liquorAlcoholContent4 = 20
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 17){
+    var liquorAlcoholContent4 = 30
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 18){
+    var liquorAlcoholContent4 = 40
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }else if(liquorType4.value == 19){
+    var liquorAlcoholContent4 = 50
+    var abvCalc4 = liquorVolumeValue4 * (liquorAlcoholContent4 / 100) * 0.8;
+  }
+
+  var liquorVolume5 = document.getElementById('liquor-volume5');
+  console.log(liquorVolume5);
+  var liquorType5 = document.getElementById('liquor-type5');
+  var liquorVolumeValue5 = liquorVolume5.value;
+  var abvCalc5 = 0;
+
+  if(liquorType5.value == 1){
+    var liquorAlcoholContent5 = 15
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 2){
+    var liquorAlcoholContent5 = 10
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 3){
+    var liquorAlcoholContent5 = 15
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 4){
+    var liquorAlcoholContent5 = 5
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 5){
+    var liquorAlcoholContent5 = 35
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 6){
+    var liquorAlcoholContent5 = 5
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 7){
+    var liquorAlcoholContent5 = 9
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 8){
+    var liquorAlcoholContent5 = 40
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 9){
+    var liquorAlcoholContent5 = 10
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 10){
+    var liquorAlcoholContent5 = 10
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 11){
+    var liquorAlcoholContent5 = 8
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 12){
+    var liquorAlcoholContent5 = 40
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 13){
+    var liquorAlcoholContent5 = 40
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 14){
+    var liquorAlcoholContent5 = 5
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 15){
+    var liquorAlcoholContent5 = 10
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 16){
+    var liquorAlcoholContent5 = 20
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 17){
+    var liquorAlcoholContent5 = 30
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 18){
+    var liquorAlcoholContent5 = 40
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }else if(liquorType5.value == 19){
+    var liquorAlcoholContent5 = 50
+    var abvCalc5 = liquorVolumeValue5 * (liquorAlcoholContent5 / 100) * 0.8;
+  }
+
+  var totalAbvCalc = abvCalc + abvCalc2 + abvCalc3 + abvCalc4 + abvCalc5;
+
+  todayAbv.innerHTML = Math.round(totalAbvCalc);
+  
+
+  const renderDom = document.getElementById("charge-form");
+
+  document.getElementById('abvCalcData').value = totalAbvCalc;
+  var ele = document.getElementById('abvCalcData');
+
+//   //血中アルコール濃度
+  const genderId = document.getElementById('gender-id');
+
+  if (genderId.textContent == 1) {
+    var averageWeight = 55;
+  } else if (genderId.textContent == 2) {
+    var averageWeight = 70;
+  } else if (genderId.textContent == 3) {
+    var averageWeight = 62;
+  }
+
+  var bloodAlcoholConcentration = parseFloat(liquorVolumeValue * liquorAlcoholContent / (averageWeight * 833)) || 0;
+  var bloodAlcoholConcentration2 = parseFloat(liquorVolumeValue2 * liquorAlcoholContent2 / (averageWeight * 833)) || 0;
+  var bloodAlcoholConcentration3 = parseFloat(liquorVolumeValue3 * liquorAlcoholContent3 / (averageWeight * 833)) || 0;
+  var bloodAlcoholConcentration4 = parseFloat(liquorVolumeValue4 * liquorAlcoholContent4 / (averageWeight * 833)) || 0;
+  var bloodAlcoholConcentration5 = parseFloat(liquorVolumeValue5 * liquorAlcoholContent5 / (averageWeight * 833)) || 0;
+  var totalBloodAlcoholConcentration = bloodAlcoholConcentration + bloodAlcoholConcentration2 + bloodAlcoholConcentration3 + bloodAlcoholConcentration4 + bloodAlcoholConcentration5;
+
+  var bloodAlcoholConcentrationView = document.getElementById('blood-alcohol-content');
+  bloodAlcoholConcentrationView.innerHTML = Math.round(totalBloodAlcoholConcentration * 100) / 100;
+
+  if (totalBloodAlcoholConcentration <= 0) {
+    var healthinessJudge = "休肝日";
+  } else if (totalBloodAlcoholConcentration <= 0.04) {
+    var healthinessJudge = "爽快期";
+  } else if (totalBloodAlcoholConcentration <= 0.10) {
+    var healthinessJudge = "ほろ酔い期";
+  } else if (totalBloodAlcoholConcentration <= 0.15) {
+    var healthinessJudge = "酩酊初期";
+  } else if (totalBloodAlcoholConcentration <= 0.30) {
+    var healthinessJudge = "酩酊期";
+  } else if (totalBloodAlcoholConcentration <= 0.40) {
+    var healthinessJudge = "泥酔期";
+  } else if (totalBloodAlcoholConcentration > 0.40) {
+    var healthinessJudge = "昏睡期";
+  }
+
+  todayHealthiness.innerHTML = healthinessJudge;
+  var healthinessObj = `<input disabled value=${totalBloodAlcoholConcentration} type="hidden" name='healthiness' id='replace-tag'>`;
+  renderDom.insertAdjacentHTML("afterbegin", healthinessObj);
+}
+
+window.setInterval( abv_calc, 100 );
+
+</script>
