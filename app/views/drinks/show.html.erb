@@ -1,0 +1,204 @@
+
+
+<div class='drink-id'>
+    <div>
+      <%= "#{@drink.start_time.strftime("%Y年 %m月 %d日")}の詳細です" %>
+    </div>
+    <div>
+      <%= "#{@drink.type.name}：" %>
+      <%= "#{@drink.volume}ml"%>
+    </div>
+
+    <% if @drink.type2_id >= 1 %>
+      <div>
+        <% if @drink.type2_id == 1 %>
+        赤ワイン：
+        <% elsif @drink.type2_id == 2 %>
+        白ワイン：
+        <% elsif @drink.type2_id == 3 %>
+        日本酒：
+        <% elsif @drink.type2_id == 4 %>
+        ビール：
+        <% elsif @drink.type2_id == 5 %>
+        焼酎：
+        <% elsif @drink.type2_id == 6 %>
+        酎ハイ：
+        <% elsif @drink.type2_id == 7 %>
+        ストロングゼロ：
+        <% elsif @drink.type2_id == 8 %>
+        ウィスキー：
+        <% elsif @drink.type2_id == 9 %>
+        梅酒：
+        <% elsif @drink.type2_id == 10 %>
+        カクテル：
+        <% elsif @drink.type2_id == 11 %>
+        マッコリ：
+        <% elsif @drink.type2_id == 12 %>
+        泡盛：
+        <% elsif @drink.type2_id == 13 %>
+        テキーラ：
+        <% elsif @drink.type2_id == 14 %>
+        その他(アルコール度数5％程度)：
+        <% elsif @drink.type2_id == 15 %>
+        その他(アルコール度数10％程度)：
+        <% elsif @drink.type2_id == 16 %>
+        その他(アルコール度数20％程度)：
+        <% elsif @drink.type2_id == 17 %>
+        その他(アルコール度数30％程度)：
+        <% elsif @drink.type2_id == 18 %>
+        その他(アルコール度数40％程度)：
+        <% elsif @drink.type2_id == 19 %>
+        その他(アルコール度数50％程度)：
+        <% end %>
+        <%= "#{@drink.volume2}ml"%>
+      </div>
+    <% end %>
+
+    <% if @drink.type3_id >= 1 %>
+      <div>
+        <% if @drink.type3_id == 1 %>
+        赤ワイン：
+        <% elsif @drink.type3_id == 2 %>
+        白ワイン：
+        <% elsif @drink.type3_id == 3 %>
+        日本酒：
+        <% elsif @drink.type3_id == 4 %>
+        ビール：
+        <% elsif @drink.type3_id == 5 %>
+        焼酎：
+        <% elsif @drink.type3_id == 6 %>
+        酎ハイ：
+        <% elsif @drink.type3_id == 7 %>
+        ストロングゼロ：
+        <% elsif @drink.type3_id == 8 %>
+        ウィスキー：
+        <% elsif @drink.type3_id == 9 %>
+        梅酒：
+        <% elsif @drink.type3_id == 10 %>
+        カクテル：
+        <% elsif @drink.type3_id == 11 %>
+        マッコリ：
+        <% elsif @drink.type3_id == 12 %>
+        泡盛：
+        <% elsif @drink.type3_id == 13 %>
+        テキーラ：
+        <% elsif @drink.type3_id == 14 %>
+        その他(アルコール度数5％程度)：
+        <% elsif @drink.type3_id == 15 %>
+        その他(アルコール度数10％程度)：
+        <% elsif @drink.type3_id == 16 %>
+        その他(アルコール度数20％程度)：
+        <% elsif @drink.type3_id == 17 %>
+        その他(アルコール度数30％程度)：
+        <% elsif @drink.type3_id == 18 %>
+        その他(アルコール度数40％程度)：
+        <% elsif @drink.type3_id == 19 %>
+        その他(アルコール度数50％程度)：
+        <% end %>
+        <%= "#{@drink.volume3}ml"%>
+      </div>
+    <% end %>
+
+    <% if @drink.type4_id >= 1 %>
+      <div>
+        <% if @drink.type4_id == 1 %>
+        赤ワイン：
+        <% elsif @drink.type4_id == 2 %>
+        白ワイン：
+        <% elsif @drink.type4_id == 3 %>
+        日本酒：
+        <% elsif @drink.type4_id == 4 %>
+        ビール：
+        <% elsif @drink.type4_id == 5 %>
+        焼酎：
+        <% elsif @drink.type4_id == 6 %>
+        酎ハイ：
+        <% elsif @drink.type4_id == 7 %>
+        ストロングゼロ：
+        <% elsif @drink.type4_id == 8 %>
+        ウィスキー：
+        <% elsif @drink.type4_id == 9 %>
+        梅酒：
+        <% elsif @drink.type4_id == 10 %>
+        カクテル：
+        <% elsif @drink.type4_id == 11 %>
+        マッコリ：
+        <% elsif @drink.type4_id == 12 %>
+        泡盛：
+        <% elsif @drink.type4_id == 13 %>
+        テキーラ：
+        <% elsif @drink.type4_id == 14 %>
+        その他(アルコール度数5％程度)：
+        <% elsif @drink.type4_id == 15 %>
+        その他(アルコール度数10％程度)：
+        <% elsif @drink.type4_id == 16 %>
+        その他(アルコール度数20％程度)：
+        <% elsif @drink.type4_id == 17 %>
+        その他(アルコール度数30％程度)：
+        <% elsif @drink.type4_id == 18 %>
+        その他(アルコール度数40％程度)：
+        <% elsif @drink.type4_id == 19 %>
+        その他(アルコール度数50％程度)：
+        <% end %>
+        <%= "#{@drink.volume4}ml"%>
+      </div>
+    <% end %>
+
+    <% if @drink.type5_id >= 1 %>
+      <div>
+        <% if @drink.type5_id == 1 %>
+        赤ワイン：
+        <% elsif @drink.type5_id == 2 %>
+        白ワイン：
+        <% elsif @drink.type5_id == 3 %>
+        日本酒：
+        <% elsif @drink.type5_id == 4 %>
+        ビール：
+        <% elsif @drink.type5_id == 5 %>
+        焼酎：
+        <% elsif @drink.type5_id == 6 %>
+        酎ハイ：
+        <% elsif @drink.type5_id == 7 %>
+        ストロングゼロ：
+        <% elsif @drink.type5_id == 8 %>
+        ウィスキー：
+        <% elsif @drink.type5_id == 9 %>
+        梅酒：
+        <% elsif @drink.type5_id == 10 %>
+        カクテル：
+        <% elsif @drink.type5_id == 11 %>
+        マッコリ：
+        <% elsif @drink.type5_id == 12 %>
+        泡盛：
+        <% elsif @drink.type5_id == 13 %>
+        テキーラ：
+        <% elsif @drink.type5_id == 14 %>
+        その他(アルコール度数5％程度)：
+        <% elsif @drink.type5_id == 15 %>
+        その他(アルコール度数10％程度)：
+        <% elsif @drink.type5_id == 16 %>
+        その他(アルコール度数20％程度)：
+        <% elsif @drink.type5_id == 17 %>
+        その他(アルコール度数30％程度)：
+        <% elsif @drink.type5_id == 18 %>
+        その他(アルコール度数40％程度)：
+        <% elsif @drink.type5_id == 19 %>
+        その他(アルコール度数50％程度)：
+        <% end %>
+        <%= "#{@drink.volume5}ml"%>
+      </div>
+    <% end %>
+
+    <div>
+      <%= "コメント：#{@drink.comment}" %>
+    </div>
+
+    <div>
+      <%= "接種アルコール：#{@drink.total_abv}mg" %>
+    </div>
+
+    <div><%= link_to '内容を編集する', edit_user_drink_path(user_id: current_user.id, id: @drink.id) %></div>
+    <div><%= link_to '内容を破棄する', user_drink_path(user_id: current_user.id, id: @drink.id), method: :delete, data: { confirm: 'Are you sure?' } %></div>
+
+  </div>
+</div>
