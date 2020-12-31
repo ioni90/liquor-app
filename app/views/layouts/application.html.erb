@@ -18,6 +18,11 @@
               <%= link_to "マイページ", edit_user_path(current_user.id) %>
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             </div>
+            <% if current_page?(root_path) %>
+              <div>
+                <%= button_to "アルコールを記録", new_user_drink_path(current_user.id), method: :get %>
+              <div>
+            <% end %>
           <% else %>
             <div class="grid-6">
               <div><%=link_to 'ログイン', new_user_session_path %><div>
