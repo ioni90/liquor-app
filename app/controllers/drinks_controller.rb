@@ -1,9 +1,18 @@
 class DrinksController < ApplicationController
-  before_action :set_user, except: :index
+  before_action :set_user, except: [:index, :ranking]
   def index
     if signed_in?
       @drinks = current_user.drinks
     end
+  end
+
+  def ranking
+    @duplicate_start_time = Drink.find_by(start_time: params[:start_time])
+    @rankings = Drink.where(start_time: @duplicate_start_time.start_time).order('total_abv desc').limit(5)
+  end
+
+  def ranking_info
+    @user = User.find(params[:user_id])
   end
 
   def show
@@ -29,9 +38,9 @@ class DrinksController < ApplicationController
   def create
     @drink = current_user.drinks.new(drink_record)
     if @drink.save
-      redirect_to user_drinks_path(@user.id)
+      redirect_to root_path
     else
-      redirect_to new_ser_drink_path(@user.id)
+      redirect_to new_user_drink_path(@user.id)
     end
   end
 
