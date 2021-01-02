@@ -5,7 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :age, :favorite, :gender, :prefecture, :region
+  belongs_to :age
+  belongs_to :favorite
+  belongs_to :gender
+  belongs_to :prefecture
+  belongs_to :region
   has_many :drinks
 
   with_options numericality: { other_than: 0 } do
