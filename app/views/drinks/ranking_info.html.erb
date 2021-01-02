@@ -1,0 +1,23 @@
+<div class="field">
+  <%= "#{@user.nickname} さんの詳細を表示しています" %>
+</div>
+
+<div class="field">
+  <%= "#{@user.introduction}" %>
+</div>
+
+<div class="field">
+  <%= "#{@user.gender.name}" %>
+</div>
+
+<div class="field">
+  <%= "年齢はだいたい#{@user.age.name}" %>
+</div>
+
+<div class="field">
+  <%= "#{@user.prefecture.name}の#{@user.region.name}ら辺に住んでる人" %>
+</div>
+
+<div class="field">
+  <%= "今好きなお酒は#{@user.favorite.name}" %>
+</div>
