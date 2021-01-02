@@ -1,23 +1,27 @@
-<%= month_calendar events: @drinks do |date, drinks| %>
-  <div id='click-show-view'><%= date.day %></div>
-  <% drinks.each do |drink| %>
-    <div hidden class='second-drink-id'><%= drink.id %></div>
-    <div>
-      <% if drink.non_drinking == false %>
-        <p>飲酒している日です</p>
-      <% elsif drink.non_drinking == true %>
-        <p>休肝日です</p>
+
+<% if user_signed_in? %>
+  <%= month_calendar events: @drinks do |date, drinks| %>
+    <div id='click-show-view'><%= date.day %></div>
+    <% drinks.each do |drink| %>
+      <% if user_signed_in? && current_user.id == drink.user_id %>
+        <div hidden class='second-drink-id'><%= drink.id %></div>
+        <div>
+          <% if drink.non_drinking == false %>
+            <p>飲酒している日です</p>
+          <% elsif drink.non_drinking == true %>
+            <p>休肝日です</p>
+          <% end %>
+          <%=link_to(user_drink_path(user_id: current_user.id, id: drink.id)) do %>
+            <button>詳細を表示</button>
+          <% end %>
+          <%= link_to(edit_user_drink_path(user_id: current_user.id, id: drink.id)) do %>
+            <button>内容を修正</button>
+          <% end %>
+          <%= link_to(user_drink_path(user_id: current_user.id, id: drink.id), method: :delete, data: { confirm: 'Are you sure?' }) do %>
+            <button>記録を削除</button>
+          <% end %>
+        </div>
       <% end %>
-      <%=link_to(user_drink_path(user_id: current_user.id, id: drink.id)) do %>
-        <button>詳細を表示</button>
-      <% end %>
-      <%= link_to(edit_user_drink_path(user_id: current_user.id, id: drink.id)) do %>
-        <button>内容を修正</button>
-      <% end %>
-      <%= link_to(user_drink_path(user_id: current_user.id, id: drink.id), method: :delete, data: { confirm: 'Are you sure?' }) do %>
-        <button>記録を削除</button>
-      <% end %>
-      
-    </div>
+    <% end %>
   <% end %>
 <% end %>
