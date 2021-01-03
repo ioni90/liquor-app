@@ -13,6 +13,7 @@ class DrinksController < ApplicationController
 
   def ranking_info
     @user = User.find(params[:user_id])
+    @drinks = Drink.where(user_id: params[:user_id])
   end
 
   def show

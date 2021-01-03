@@ -21,3 +21,8 @@
 <div class="field">
   <%= "今好きなお酒は#{@user.favorite.name}" %>
 </div>
+
+<h1>飲酒チャート</h1>
+<div>
+  <%= line_chart @drinks.pluck(:start_time, :total_abv), discrete: true, xtitle: "飲酒日", ytitle: "純アルコール量(mg)" %>
+</div>
