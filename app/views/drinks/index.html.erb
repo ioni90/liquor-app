@@ -1,4 +1,4 @@
-
+<% breadcrumb :root %>
 <% if user_signed_in? %>
   <%= month_calendar events: @drinks do |date, drinks| %>
     <div id='click-show-view'><%= date.day %></div>
