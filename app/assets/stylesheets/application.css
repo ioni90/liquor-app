@@ -17,3 +17,42 @@
  * {
   box-sizing: border-box;
 }
+
+.log-in-page {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 500px;
+  width: 300px;
+  border-radius: 18px;
+  transition: box-shadow 0.5s ease-out, transform 0.5s ease-out;
+  margin: 20px auto;
+  background-color: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+.log-in-page:hover {
+  box-shadow: 0 10px 25px 0 rgba(60, 194, 235, 0.5);
+  transform: translateY(-10px);
+}
+
+.log-in-link {
+  margin-top: -60px;
+
+}
+
+.or {
+  margin-top: 15px;
+}
+
+.sign-up-link {
+  margin: 15px;
+}
+
+.facebook-link {
+  margin: 15px;
+}
