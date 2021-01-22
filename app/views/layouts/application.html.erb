@@ -25,14 +25,24 @@
             <% end %>
           <% else %>
             <div class="log-in-page">
-              <div>
-                <div class="log-in-link"><%=link_to 'ログイン', new_user_session_path %><div>
-                <div class="sign-up-link"><%=link_to '新規登録', new_user_registration_path %><div>
+              <div class="inner-log-in-page">
+                <div class="log-in-link">
+                  <%=link_to 'ログイン', new_user_session_path %>
+                </div>
+                <div class="sign-up-link">
+                  <%=link_to '新規登録', new_user_registration_path %>
+                </div>
                 <p class="or">OR</p>
-                <div class="facebook-link"><%= link_to 'Facebookで登録', user_facebook_omniauth_authorize_path, method: :post%></div>
-                <div class="google-link"><%= link_to 'Googleで登録', user_google_oauth2_omniauth_authorize_path, method: :post%></div>
+                <div class="facebook-link">
+                  <img src="/assets/f_logo.png", width= "25px", alt="facebook-logo">
+                  <%= link_to 'Connect with Facebook', user_facebook_omniauth_authorize_path, method: :post%>
+                </div>
+                <div class="google-link">
+                  <img src="/assets/google-icon.png", width= "30px", alt="google-icon">
+                  <%= link_to 'Connect with Google', user_google_oauth2_omniauth_authorize_path, method: :post%>
+                </div>
               </div>
-            <div>
+            </div>
           <% end %>
         </div>
       </header>
