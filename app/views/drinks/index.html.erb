@@ -1,4 +1,29 @@
-<% breadcrumb :root %>
+<div class="log-in-wrapper">
+  <% breadcrumb :root %>
+  <div class="top-title">Let's keep your drink diary</div>
+  <div class="top-message">あなたのお酒を飲んだ日々を記録するアプリです<br>
+  過去にお酒とどんな気持ちで過ごしていたか思い出してください<br>
+  お酒好きな人たちがどんな風に日々呑んでいるかチェックもできます</div>
+  <div class="log-in-page">
+    <div class="inner-log-in-page">
+      <div class="log-in-link">
+        <%=link_to 'ログイン', new_user_session_path %>
+      </div>
+      <div class="sign-up-link">
+        <%=link_to '新規登録', new_user_registration_path %>
+      </div>
+      <p class="or">OR</p>
+      <div class="facebook-link">
+        <img src="/assets/f_logo.png", width= "25px", alt="facebook-logo">
+        <%= link_to 'Connect with Facebook', user_facebook_omniauth_authorize_path, method: :post%>
+      </div>
+      <div class="google-link">
+        <img src="/assets/google-icon.png", width= "30px", alt="google-icon">
+        <%= link_to 'Connect with Google', user_google_oauth2_omniauth_authorize_path, method: :post%>
+      </div>
+    </div>
+  </div>
+</div>
 <% if user_signed_in? %>
   <%= month_calendar events: @drinks do |date, drinks| %>
     <div id='click-show-view'><%= date.day %></div>

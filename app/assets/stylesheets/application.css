@@ -18,81 +18,18 @@
   box-sizing: border-box;
 }
 
-.log-in-page {
-  display:flex;
-  justify-content: center;
-  align-items: center;
+header {
+  z-index: 10;
+  height: 64px;
+  top: 300px;
+  background-color: rgb(241, 245, 188);
+  width: 100%;
   text-align: center;
-  height: 500px;
-  width: 300px;
-  border-radius: 18px;
-  transition: box-shadow 0.5s ease-out, transform 0.5s ease-out;
-  margin: 20px auto;
-  background-color: transparent;
+  z-index: 2;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
 a {
   text-decoration: none;
 }
 
-.inner-log-in-page {
-  width: 250px;
-}
-
-.log-in-page:hover {
-  box-shadow: 0 10px 25px 0 rgba(60, 194, 235, 0.5);
-  transform: translateY(-10px);
-}
-
-.log-in-link {
-  margin: -60px auto 0 auto;
-  background-color: rgb(219, 53, 53);
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  width: 60%;
-}
-
-.log-in-link a{ 
-  color: inherit;
-}
-
-.or {
-  margin-top: 20px;
-}
-
-.sign-up-link {
-  margin: 15px auto 15px auto;
-  background-color: rgb(248, 191, 86);
-  border-radius: 5px;
-  color: rgb(119, 118, 116);
-  width: 150px;
-}
-
-.sign-up-link a{ 
-  color: inherit;
-}
-
-.facebook-link {
-  margin: 15px;
-  border-radius: 3px;
-  color: rgb(57, 57, 138);
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.facebook-link a{ 
-  color: inherit;
-}
-
-.google-link {
-  margin: 15px;
-  border-radius: 3px;
-  color: rgb(53, 90, 126);
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.google-link a{ 
-  color: inherit;
-}
