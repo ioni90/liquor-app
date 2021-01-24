@@ -1,5 +1,6 @@
+<% breadcrumb :root %>
+<% unless user_signed_in? %>
 <div class="log-in-wrapper">
-  <% breadcrumb :root %>
   <div class="top-title">Let's keep your drink diary</div>
   <div class="top-message">あなたのお酒を飲んだ日々を記録するアプリです<br>
   過去にお酒とどんな気持ちで過ごしていたか思い出してください<br>
@@ -24,27 +25,37 @@
     </div>
   </div>
 </div>
+<%end%>
+<div class="usage-explanation">
+  <p class="detail-explanation">〜 右上のメニューボタンからアルコールを記録できます 〜</p>
+</div>
 <% if user_signed_in? %>
   <%= month_calendar events: @drinks do |date, drinks| %>
     <div id='click-show-view'><%= date.day %></div>
     <% drinks.each do |drink| %>
       <% if user_signed_in? && current_user.id == drink.user_id %>
         <div hidden class='second-drink-id'><%= drink.id %></div>
-        <div>
+        <div class="square">
           <% if drink.non_drinking == false %>
-            <p>飲酒している日です</p>
+            <div><%= image_tag 'kanpai.png' %></div>
           <% elsif drink.non_drinking == true %>
-            <p>休肝日です</p>
+            <div><%= image_tag 'nondrinking.png' %></div>
           <% end %>
-          <%=link_to(user_drink_path(user_id: current_user.id, id: drink.id)) do %>
-            <button>詳細を表示</button>
-          <% end %>
-          <%= link_to(edit_user_drink_path(user_id: current_user.id, id: drink.id)) do %>
-            <button>内容を修正</button>
-          <% end %>
-          <%= link_to(user_drink_path(user_id: current_user.id, id: drink.id), method: :delete, data: { confirm: 'Are you sure?' }) do %>
-            <button>記録を削除</button>
-          <% end %>
+          <span></span>
+          <div class="more">
+            <span></span>
+            <ul class="more_list">
+              <li class="drink-list">
+                <%=link_to '詳細を表示', user_drink_path(user_id: current_user.id, id: drink.id) %>
+              </li>
+              <li class="drink-list">
+                <%= link_to '内容を修正', edit_user_drink_path(user_id: current_user.id, id: drink.id) %>
+              </li>
+              <li class="drink-list">
+                <%= link_to '記録を削除', user_drink_path(user_id: current_user.id, id: drink.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+              </li>
+            </ul>
+          </div>
         </div>
       <% end %>
     <% end %>
