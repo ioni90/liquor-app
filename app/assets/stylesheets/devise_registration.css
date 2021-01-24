@@ -1,0 +1,58 @@
+.signup-wrapper {
+  margin: 40px 0 0 30px;
+}
+
+.signup-text {
+  font-family: fantasy;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.signup-submit-button {
+  font-family: monospace;
+  margin-top: 20px;
+  display       : inline-block;
+  border-radius : 5%;
+  font-size     : 13pt;
+  text-align    : center;
+  cursor        : pointer;
+  padding       : 8px 8px;
+  background    : rgba(135, 184, 90, 0.8);
+  color         : #ffffff; 
+  line-height   : 1em; 
+  opacity       : 1;
+  transition    : .3s;
+  box-shadow    : 4px 4px 3px #b6b5b5;
+}
+
+.signup-submit-button:hover {
+  box-shadow    : none;
+  opacity       : 0.8;
+}
+
+.signup-field {
+  font-family: monospace;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.pull-select {
+  width: 150px;
+}
+
+.indispensable {
+  background-color: rgb(233, 126, 126);
+  color: #ffffff;
+  width: 30px;
+  padding: 2px;
+  font-size: 12px;
+  /* text-align: center; */
+}
+
+.dispensable {
+  background-color: rgb(139, 136, 136);
+  color: #ffffff;
+  width: 30px;
+  padding: 2px;
+  font-size: 12px;
+}
