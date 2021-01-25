@@ -138,3 +138,11 @@ a {
 #menu-btn-check:checked ~ .menu-content {
   left: 80%;
 }
+
+.breadcrumb {
+  margin: 0 0 10px 10px;
+  padding-top: 3px;
+  color: rgb(95, 71, 42);
+  font-family: fantasy;
+  background-color: rgb(248, 250, 227);
+}
