@@ -1,11 +1,15 @@
 <% breadcrumb :drinks_ranking %>
 
-<div><%= "#{@duplicate_start_time.start_time.strftime("%Y年 %m月 %d日")}の飲酒ランキング" %></div>
+<div class="ranking-image">
+  <p class="ranking-explanation">〜 好きな人の名前をクリックするとその人の情報が見れます 〜</p>
+</div>
+
+<div class="ranking-title"><%= "#{@duplicate_start_time.start_time.strftime("%Y年 %m月 %d日")}の飲酒ランキング" %></div>
 
 <div class="ranking-wrapper">
   <% @rankings.each.with_index(1) do |ranking, i| %>
     <div class="personal-ranking">
-      <%= "第#{i}位 :" %> <strong><%= link_to "#{ranking.user.nickname}", drinks_ranking_info_path(user_id: ranking.user_id, start_time: ranking.start_time) %></strong>　<%= "アルコール量：#{ranking.total_abv}mg" %>
+      <span class="ranking-order"><%= "第#{i}位 :" %></span> <span class="personal-page-link"><%= link_to "#{ranking.user.nickname}", drinks_ranking_info_path(user_id: ranking.user_id, start_time: ranking.start_time) %></span> <%= "アルコール量：#{ranking.total_abv}mg" %>
     </div>
   <% end %>
 </div>
