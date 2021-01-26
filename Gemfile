@@ -59,3 +59,6 @@ gem 'simple_calendar', '~> 2.0'
 gem 'pry-rails'
 gem "chartkick"
 gem "gretel"
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem 'omniauth', '1.9.1'

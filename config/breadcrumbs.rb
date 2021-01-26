@@ -3,12 +3,12 @@ crumb :root do
 end
 
 crumb :edit_user do
-  link "マイページ", edit_user_path(current_user.id)
+  link "My Page", edit_user_path(current_user.id)
   parent :root
 end
 
 crumb :new_user_drink do
-  link "アルコールを記録", new_user_drink_path(current_user.id)
+  link "Write Your Liquor", new_user_drink_path(current_user.id)
   parent :root
 end
 
@@ -18,23 +18,23 @@ crumb :user_drink do
   elsif params[:start_time]
     drink = current_user.drinks.find_by(user_id: current_user.id, start_time: params[:start_time])
   end
-  link "飲酒詳細", user_drink_path(user_id: current_user.id, id: drink.id)
+  link "Liqour Details", user_drink_path(user_id: current_user.id, id: drink.id)
   parent :root
 end
 
 crumb :edit_user_drink do
-  link "飲酒内容修正", edit_user_drink_path(user_id: current_user.id, id: params[:id])
+  link "Rewrite Your Liquor", edit_user_drink_path(user_id: current_user.id, id: params[:id])
   parent :root
   parent :user_drink
 end
 
 crumb :drinks_ranking_info do
-  link "個人ページ", drinks_ranking_info_path(user_id: params[:user_id])
+  link "Others", drinks_ranking_info_path(user_id: params[:user_id])
   parent :drinks_ranking
 end
 
 crumb :drinks_ranking do
-  link 'ランキング', drinks_ranking_path(start_time: params[:start_time])
+  link 'Ranking', drinks_ranking_path(start_time: params[:start_time])
   parent :user_drink
 end
 

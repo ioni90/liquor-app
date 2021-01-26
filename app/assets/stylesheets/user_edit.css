@@ -1,0 +1,36 @@
+.edit-user-title {
+  padding: 3px;
+  margin: 20px 0 20px 30px;
+  background-color: rgb(245, 238, 206);
+  width: 300px;
+  border-radius: 4px;
+  text-align: center;
+  color: rgb(67, 106, 138);
+}
+
+.user-field {
+  margin: 0 0 20px 35px;
+}
+
+.update-user {
+  font-family: monospace;
+  margin: 20px 0 0 60px;
+  display       : inline-block;
+  border-style: none;
+  border-radius : 5%;
+  font-size     : 13pt;
+  text-align    : center;
+  cursor        : pointer;
+  padding       : 8px 8px;
+  background    : rgba(98, 168, 136, 0.8);
+  color         : #ffffff; 
+  line-height   : 1em; 
+  opacity       : 1;
+  transition    : .3s;
+  box-shadow    : 4px 4px 3px #b6b5b5;
+}
+
+.update-user:hover {
+  box-shadow    : none;
+  opacity       : 0.8;
+}

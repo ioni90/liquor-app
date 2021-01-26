@@ -1,0 +1,45 @@
+.personal-info-wrapper {
+  margin: 30px 0 60px 30px;
+}
+
+.personal-name {
+  color: rgb(230, 86, 61);
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.personal-info {
+  margin-bottom: 20px;
+}
+
+.personal-info-list {
+  margin: 0 0 10px 10px;
+}
+
+.chart-title {
+  margin-left: 30px;
+  font-family: monospace;
+  font-size: 15px;
+  background-color: rgb(99, 135, 167);
+  width: 100px;
+  border-radius: 3px;
+  text-align: center;
+  color: aliceblue;
+}
+
+.ranking-info-image {
+  background-image: url("sake.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 20vh;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+.ranking-info-explanation {
+  padding: 40px 0 0 40px;
+  font-family: fantasy;
+  font-size: 16px;
+  color: rgb(34, 35, 36);
+}

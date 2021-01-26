@@ -1,109 +1,114 @@
 <% breadcrumb :new_user_drink %>
-<h2><%= "#{current_user.nickname}さんの飲んだお酒の登録画面"%></h2>
-<div hidden id='gender-id'><%=@user.gender_id%></div>
+<div class="new-drink-image">
+  <p class="detail-explanation">〜 下の記録した情報は自身のカレンダーに記載されます 〜</p>
+</div>
 
-<%= form_with model: @drink, url: user_drinks_path, class: 'registration-main', id:'charge-form', local: true do |f| %>
-  <%# <%= render "devise/shared/error_messages", resource: resource %>
+<div class="new-drink-wrapper">
+  <h2 class="new-drink-title"><%= "〜 #{current_user.nickname}さんの飲んだお酒をカレンダーに記録 〜"%></h2>
+  <div hidden id='gender-id'><%=@user.gender_id%></div>
 
-  <div class='field'>
-    <%= f.label :start_time,  "飲酒した日付：" %>
-    <%= f.date_field :start_time, class:"start_time", id:"start-time" %>
-  </div>
+  <%= form_with model: @drink, url: user_drinks_path, class: 'registration-main', id:'charge-form', local: true do |f| %>
 
-  <div class="field">お酒を飲みましたか？
-    <%= f.label :non_drinking_true, "休肝日です！", class:"label-motion" %>
-    <%= f.radio_button :non_drinking, :true, class:"remove-input-mark", id:"non-drinking-day" %>
-  
-    <%= f.label :non_drinking_false, "ハイ！", class:"label-motion" %>
-    <%= f.radio_button :non_drinking, :false, class:"remove-input-mark" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :type_id, value='お酒の種類：' %>
-    <%= f.collection_select(:type_id, Type.all, :id, :name, {}, {class:"pull-select", id:"liquor-type"}) %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :volume,  "飲んだ量：" %>
-    <%= f.number_field :volume, class:"volume", id:"liquor-volume", placeholder:"何ミリリットル?", maxlength:"5" %>
-  </div>
-
-
-  <button type=button id="clickButton">Click Here</button>
-
-  <div class="field">
-    <%= f.label :type2_id, value='お酒の種類２：', class:"display-none", id:"label-liquor-type2" %>
-    <%= f.collection_select(:type2_id, Type2.all, :id, :name, {}, {class:"pull-select", id:"liquor-type2"}) %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :volume2,  "飲んだ量：", class:"display-none", id:"label-liquor-volume2" %>
-    <%= f.number_field :volume2, class:"volume", id:"liquor-volume2", placeholder:"何ミリリットル?", maxlength:"5" %>
-  </div>
-
-  <button type=button id="clickButton2">Click Here</button>
-
-  <div class="field">
-    <%= f.label :type3_id, value='お酒の種類３：', class:"display-none", id:"label-liquor-type3" %>
-    <%= f.collection_select(:type3_id, Type3.all, :id, :name, {}, {class:"pull-select", id:"liquor-type3"}) %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :volume3,  "飲んだ量：", class:"display-none", id:"label-liquor-volume3" %>
-    <%= f.number_field :volume3, class:"volume", id:"liquor-volume3", placeholder:"何ミリリットル?", maxlength:"5" %>
-  </div>
-
-
-  <button type=button id="clickButton3">Click Here</button>
-
-  <div class="field">
-    <%= f.label :type4_id, value='お酒の種類４：', class:"display-none", id:"label-liquor-type4" %>
-    <%= f.collection_select(:type4_id, Type4.all, :id, :name, {}, {class:"pull-select", id:"liquor-type4"}) %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :volume4,  "飲んだ量：", class:"display-none", id:"label-liquor-volume4" %>
-    <%= f.number_field :volume4, class:"volume", id:"liquor-volume4", placeholder:"何ミリリットル?", maxlength:"5" %>
-  </div>
-
-
-  <button type=button id="clickButton4">Click Here</button>
-
-  <div class="field">
-    <%= f.label :type5_id, value='お酒の種類５：', class:"display-none", id:"label-liquor-type5" %>
-    <%= f.collection_select(:type5_id, Type5.all, :id, :name, {}, {class:"pull-select", id:"liquor-type5"}) %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :volume5,  "飲んだ量：", class:"display-none", id:"label-liquor-volume5" %>
-    <%= f.number_field :volume5, class:"volume", id:"liquor-volume5", placeholder:"何ミリリットル?", maxlength:"5" %>
-  </div>
-
-  <div>
-    <div class="abv-content">
-      <span>本日の接種アルコール量：</span>
-      <span id='today-abv'>0</span>グラム
+    <div class='new-date-field'>
+      <%= f.label :start_time,  "飲酒した日付：" %>
+      <%= f.date_field :start_time, class:"start_time", id:"start-time" %>
     </div>
-    <div class="abv-content">
-      <span>血中アルコール濃度：</span>
-      <span id='blood-alcohol-content'>0</span>％
+
+    <div class="cp_ipradio">
+      <span class="confirm-new-drink">🌸 本日お酒を飲みましたか？</span>
+      <%= f.label :non_drinking_true, "No", class:"label-motion" %>
+      <%= f.radio_button :non_drinking, :true, class:"option-input radio", id:"non-drinking-day" %>
+    
+      <%= f.label :non_drinking_false, "Yes！", class:"label-motion" %>
+      <%= f.radio_button :non_drinking, :false, class:"option-input radio", checked: true %>
     </div>
-    <div class="abv-content">
-      <span>酔い具合：</span>
-      <span id='today-healthiness'></span>
+
+    <div class="new-field">
+      <%= f.label :type_id, value='お酒の種類：' %>
+      <%= f.collection_select(:type_id, Type.all, :id, :name, {}, {class:"pull-select", id:"liquor-type"}) %>
     </div>
-  </div>
 
-  <div class='field'>
-    <%= f.label :comment,  "コメント：", class:"comment-decoration-label" %>
-    <%= f.text_field :commnet, class:"comment-decoration-field", maxlength:"200" %>
-  </div>
+    <div class='new-field'>
+      <%= f.label :volume,  "飲んだ量：" %>
+      <%= f.number_field :volume, class:"volume", id:"liquor-volume", placeholder:"何ミリリットル?", maxlength:"5" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "本日のお酒を記録" %>
-  </div>
-<% end %>
 
+    <button type=button id="clickButton" class="add-input-form">入力フォームの追加</button>
+
+    <div class="new-field">
+      <%= f.label :type2_id, value='お酒の種類２：', class:"display-none", id:"label-liquor-type2" %>
+      <%= f.collection_select(:type2_id, Type2.all, :id, :name, {}, {class:"pull-select", id:"liquor-type2"}) %>
+    </div>
+
+    <div class='new-field'>
+      <%= f.label :volume2,  "飲んだ量：", class:"display-none", id:"label-liquor-volume2" %>
+      <%= f.number_field :volume2, class:"volume", id:"liquor-volume2", placeholder:"何ミリリットル?", maxlength:"5" %>
+    </div>
+
+    <button type=button id="clickButton2" class="add-input-form">入力フォームの追加</button>
+
+    <div class="new-field">
+      <%= f.label :type3_id, value='お酒の種類３：', class:"display-none", id:"label-liquor-type3" %>
+      <%= f.collection_select(:type3_id, Type3.all, :id, :name, {}, {class:"pull-select", id:"liquor-type3"}) %>
+    </div>
+
+    <div class='new-field'>
+      <%= f.label :volume3,  "飲んだ量：", class:"display-none", id:"label-liquor-volume3" %>
+      <%= f.number_field :volume3, class:"volume", id:"liquor-volume3", placeholder:"何ミリリットル?", maxlength:"5" %>
+    </div>
+
+
+    <button type=button id="clickButton3" class="add-input-form">入力フォームの追加</button>
+
+    <div class="new-field">
+      <%= f.label :type4_id, value='お酒の種類４：', class:"display-none", id:"label-liquor-type4" %>
+      <%= f.collection_select(:type4_id, Type4.all, :id, :name, {}, {class:"pull-select", id:"liquor-type4"}) %>
+    </div>
+
+    <div class='new-field'>
+      <%= f.label :volume4,  "飲んだ量：", class:"display-none", id:"label-liquor-volume4" %>
+      <%= f.number_field :volume4, class:"volume", id:"liquor-volume4", placeholder:"何ミリリットル?", maxlength:"5" %>
+    </div>
+
+
+    <button type=button id="clickButton4" class="add-input-form">入力フォームの追加</button>
+
+    <div class="new-field">
+      <%= f.label :type5_id, value='お酒の種類５：', class:"display-none", id:"label-liquor-type5" %>
+      <%= f.collection_select(:type5_id, Type5.all, :id, :name, {}, {class:"pull-select", id:"liquor-type5"}) %>
+    </div>
+
+    <div class='new-field'>
+      <%= f.label :volume5,  "飲んだ量：", class:"display-none", id:"label-liquor-volume5" %>
+      <%= f.number_field :volume5, class:"volume", id:"liquor-volume5", placeholder:"何ミリリットル?", maxlength:"5" %>
+    </div>
+
+    <div>
+      <div class="abv-content">
+        <span>▷ 本日の接種アルコール量：</span>
+        <span id='today-abv'>0</span>グラム
+      </div>
+      <div class="abv-content">
+        <span>▷ 血中アルコール濃度：</span>
+        <span id='blood-alcohol-content'>0</span>％
+      </div>
+      <div class="abv-content">
+        <span>▷ 酔い具合：</span>
+        <span id='today-healthiness'></span>
+      </div>
+    </div>
+
+    <div class='comment-field'>
+      <%= f.label :comment,  "一言コメント：", class:"comment-decoration-label" %>
+      <%= f.text_field :comment, class:"comment-decoration-field", maxlength:"30" %>
+    </div>
+
+    <div>
+      <%= f.submit "本日のお酒を記録", class:"new-drink-submit" %>
+    </div>
+  <% end %>
+</div>
 
 <script>
 

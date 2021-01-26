@@ -1,30 +1,42 @@
 <% breadcrumb :drinks_ranking_info %>
 
-<div class="field">
-  <%= "#{@user.nickname} さんの詳細を表示しています" %>
+<div class="ranking-info-image">
+  <p class="ranking-info-explanation">〜 グラフからその人がどんな風に呑んでいたか思いを馳せられます 〜</p>
 </div>
 
-<div class="field">
-  <%= "#{@user.introduction}" %>
+<div class="personal-info-wrapper">
+  <div class="personal-info">
+    <span class="personal-name"><%= "#{@user.nickname}さん" %></span>のページを表示中
+  </div>
+
+  <% if @user.introduction %>
+  <div class="personal-info-list">
+    <%= "#{@user.introduction}" %>
+  </div>
+  <% end %>
+
+  <div class="personal-info-list">
+    <%= "#{@user.gender.name}" %>
+  </div>
+  
+  <% if @user.age %>
+    <div class="personal-info-list">
+      <%= "年齢はだいたい#{@user.age.name}" %>
+    </div>
+  <% end %>
+
+  <div class="personal-info-list">
+    <%= "#{@user.prefecture.name}の#{@user.region.name}ら辺に住んでる人" %>
+  </div>
+
+  <% if @user.favorite %>
+  <div class="personal-info-list">
+    <%= "今好きなお酒は#{@user.favorite.name}" %>
+  </div>
+  <% end %>
 </div>
 
-<div class="field">
-  <%= "#{@user.gender.name}" %>
-</div>
-
-<div class="field">
-  <%= "年齢はだいたい#{@user.age.name}" %>
-</div>
-
-<div class="field">
-  <%= "#{@user.prefecture.name}の#{@user.region.name}ら辺に住んでる人" %>
-</div>
-
-<div class="field">
-  <%= "今好きなお酒は#{@user.favorite.name}" %>
-</div>
-
-<h1>飲酒チャート</h1>
+<h1 class="chart-title">飲酒チャート</h1>
 <div>
   <%= line_chart @drinks.pluck(:start_time, :total_abv), discrete: true, xtitle: "飲酒日", ytitle: "純アルコール量(mg)" %>
 </div>

@@ -1,0 +1,64 @@
+.new-drink-image {
+  background-image: url("girlydrop.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 20vh;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+.new-drink-wrapper {
+  margin: 10px 0 30px 20px;
+}
+
+.new-drink-title {
+  color: rgb(75, 72, 78);
+  background-color: rgb(237, 223, 250);
+  width: 400px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 0 0 30px 20px;
+}
+
+.new-field {
+  margin: 10px 0 10px 30px;
+}
+
+.confirm-new-drink {
+  margin: 15px 30px 10px 0;
+  color: #e78084;
+  font-family: monospace;
+  font-size: 17px;
+}
+
+.new-date-field {
+  margin-left: 30px;
+}
+
+.add-input-form {
+  margin: 20px 0 10px 30px;
+}
+
+.new-drink-submit {
+  font-family: monospace;
+  margin: 20px 0 100px 30px;
+  display       : inline-block;
+  border-style: none;
+  border-radius : 5%;
+  font-size     : 13pt;
+  text-align    : center;
+  cursor        : pointer;
+  padding       : 8px 8px;
+  background    : rgba(231, 138, 158, 0.8);
+  color         : #ffffff; 
+  line-height   : 1em; 
+  opacity       : 1;
+  transition    : .3s;
+  box-shadow    : 4px 4px 3px #b6b5b5;
+}
+
+.new-drink-submit:hover {
+  box-shadow    : none;
+  opacity       : 0.8;
+}
