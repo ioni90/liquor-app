@@ -26,10 +26,11 @@
   </div>
 </div>
 <%end%>
+
+<% if user_signed_in? %>
 <div class="usage-explanation">
   <p class="detail-explanation">〜 右上のメニューボタンからアルコールを記録できます 〜</p>
 </div>
-<% if user_signed_in? %>
   <%= month_calendar events: @drinks do |date, drinks| %>
     <div id='click-show-view'><%= date.day %></div>
     <% drinks.each do |drink| %>
