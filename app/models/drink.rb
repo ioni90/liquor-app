@@ -9,11 +9,8 @@ class Drink < ApplicationRecord
 
   with_options presence: true do
     validates :start_time
-    validates :volume
-    validates :total_abv
   end
 
   validates :start_time, uniqueness: { scope: :user_id }
-  validates :type_id, numericality: { other_than: 0 }
 
  end

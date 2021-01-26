@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_19_145555) do
+ActiveRecord::Schema.define(version: 2021_01_26_145335) do
 
   create_table "drinks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "start_time", null: false
     t.boolean "non_drinking", default: false, null: false
     t.integer "type_id", null: false
-    t.integer "volume", null: false
+    t.integer "volume"
     t.integer "type2_id"
     t.integer "volume2"
     t.integer "type3_id"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_01_19_145555) do
     t.integer "volume4"
     t.integer "type5_id"
     t.integer "volume5"
-    t.integer "total_abv", null: false
+    t.integer "total_abv"
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
